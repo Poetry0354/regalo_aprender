@@ -9,19 +9,31 @@ const yesButton = document.getElementById("yes-btn");
 const buttonContainer = document.querySelector(".btn-container");
 const yesButtonStyle = window.getComputedStyle(yesButton);
 const maxYesWidth = parseFloat(yesButtonStyle.maxWidth);
-
+// get the h1
+const h1Message = document.getElementById("message");
 // array of gifs - in order
 const gifs = ["assets/images/togepi-happy.gif", "assets/images/togepi-sad-1.gif", "assets/images/togepi-sad-2.gif", "assets/images/togepi-crying.gif"];
-// array of messages
-const buttonMessages = ["Are you sure??", "Pookie please", "Pookie PLEASE", "You can't do this to me!"];
+// array of messages for button
+const buttonMessages = ["Que pashuuuu", "Nos ponemos tite", "No me parece", "Vamosss estoy chiquito"];
+// Array of page titles
 
+// Array of h1 messages
+const h1Messages = [
+    "¿Quieres ser mi san valentin? (´･ω･`)",
+    "¿No te agrado? :(",
+    "Po que tanto desprecio...",
+    "Bueno, me quedo con el postre >:("
+];
 // no button clicked
 noButton.addEventListener("click", () => {
     if (noClicks < maxNoClicks) {
         // change image
         gifElement.src = gifs[noClicks];
     }
-
+    // change h1 message
+    if (noClicks < h1Messages.length) {
+        h1Message.textContent = h1Messages[noClicks];
+    }
     // change no button text
     noButton.textContent = buttonMessages[noClicks % maxNoClicks];
 
@@ -45,15 +57,6 @@ noButton.addEventListener("click", () => {
     if (scaledWidth < maxYesWidth) {
         yesScale += 0.5; // Increment scale by a smaller step
         yesButton.style.transform = `scale(${yesScale})`;
-
-        // Get the current gap scale factor from CSS
-        const rootStyles = getComputedStyle(document.documentElement);
-        const gapScaleFactor = parseFloat(rootStyles.getPropertyValue("--gap-scale-factor")) || 250;
-
-        // Adjust the gap dynamically
-        const currentGap = parseFloat(buttonContainer.style.gap) || 20;
-        const newGap = Math.sqrt(currentGap * gapScaleFactor); // Scale based on the factor
-        buttonContainer.style.gap = `${newGap}px`;
     }
 
     // increment the number of clicks
